@@ -3,10 +3,10 @@ from bs4 import BeautifulSoup
 import os
 import telegram
 
-my_token = '964838878:AAHq2EX0j70vQSGEuCz2mryIRdmQ-UxK_gA'
+my_token = '****'
 bot = telegram.Bot(token=my_token)
 # chat_id = bot.getUpdates()[-1].message.chat.id
-my_chat_id = "@mildsalmon"
+my_chat_id = "****"
 # updates = bot.getUpdates()
 
 # for u in updates:
