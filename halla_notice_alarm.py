@@ -2,67 +2,55 @@ import requests
 from bs4 import BeautifulSoup
 import os
 import telegram
-
-my_token = '****'
-bot = telegram.Bot(token=my_token)
-# chat_id = bot.getUpdates()[-1].message.chat.id
-my_chat_id = "****"
-# updates = bot.getUpdates()
-
-# for u in updates:
-#     print(u.message)
+import sys
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-while True:
-    req = requests.get('http://www.halla.ac.kr/mbs/kr/jsp/board/list.jsp?boardId=23401&mcategoryId=&id=kr_060101000000')
-    req.encoding = 'utf-8'
 
-    html = req.text
-    soup = BeautifulSoup(html, 'html.parser')
-    posts = soup.select('table > tbody > tr > td > a')
+my_token = '****'
+req = requests.get('http://www.halla.ac.kr/mbs/kr/jsp/board/list.jsp?boardId=23401&mcategoryId=&id=kr_060101000000')
+my_chat_id = "****"
 
-    count_page_num = 0
-    count_notice_num = 0
+client_errors = [400, 401, 403, 404, 408]
+server_errors = [500, 502, 503, 504]
 
-    for i in posts:
-        # print(i.text)
-        # print(i.get('href'))
-        # print(count_page_num)
-        category = i.get('href')
-        count_page_num = count_page_num + 1  # 공지 제목 다음을 카운트하기 위해
-        if 'mcategoryI' not in category:
-            count_notice_num = count_page_num
-    # print(posts)
+if req.status_code in client_errors:
+    sys.exit(1)
+elif req.status_code in server_errors:
+    sys.exit(1)
 
-    latest = posts[count_notice_num].text
-    latest_category = posts[count_notice_num].get('href')
+bot = telegram.Bot(token=my_token)
+html = req.text
+soup = BeautifulSoup(html, 'html.parser')
+posts = soup.select('table > tbody > tr > td > a')
+count_page_num = 0
+count_notice_num = 0
 
-    # custom_keyboard ={"keyboard":[["A","B"],["C","D"]]} #{"keyboard" : [["Done", "Done 3"], ["Update"], ["Log Time"]]}
-    # reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard)
-    # # reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard)
-    # # bot.send_message(chat_id='@su_soo', text="Custom Keyboard Test", reply_markup=reply_markup)
-    # bot.sendMessage(chat_id=chat_id, text='gk', reply_markup=custom_keyboard)
-    with open(os.path.join(BASE_DIR, 'latest.txt'), 'r+') as f_read:
-        before = f_read.readline()
-        if before != latest:
-            # bot.sendMessage(chat_id=chat_id, text='new')
+for post in posts:
+    post_href = post.get('href')
+    if 'mcategoryId' in post_href:
+        count_notice_num = count_page_num
+        break
+    count_page_num = count_page_num + 1
 
-            boardSeq = latest_category.find('boardSeq=')
-            boardSeq_number = latest_category[boardSeq + 9:]
+for i in range(count_notice_num):  # 공지로 위로 올라간 게시글 제외한 최신 게시글 분류
+    del posts[0]
 
-            url = "http://www.halla.ac.kr/mbs/kr/jsp/board/view.jsp?spage=1&boardId=23401&boardSeq=" + boardSeq_number + "&mcategoryId=&id=kr_060101000000&column=&search="
+with open(os.path.join(BASE_DIR, 'latest.txt'), 'r+') as f_read:  # DB 구현후 변경 에정
+    before = f_read.readline()
 
+    for post in posts:  # 기존 크롤링 한 부분과 최신 게시글 사이에 게시글이 존재하는지 확인
+        if before == post.text:
+            print("최신글입니다.")
+            break
+        elif before != post:
+            url = "http://www.halla.ac.kr/mbs/kr/jsp/board/" + post.get('href')
+            print(url)
             bot.sendMessage(chat_id=my_chat_id, text="새 공지사항이 있습니다.")
-            bot.sendMessage(chat_id=my_chat_id, text=latest)
+            bot.sendMessage(chat_id=my_chat_id, text=post.text)
             bot.sendMessage(chat_id=my_chat_id, text=url)
+
             with open(os.path.join(BASE_DIR, 'latest.txt'), 'w+') as f_write:
-                f_write.write(latest)
-                f_write.close()
-        # else:
-        #     # bot.sendMessage(chat_id=chat_id,text='x')
-        #     bot.sendMessage(chat_id='@su_soo', text="새 공지 없음")
-        f_read.close()
+                f_write.write(post.text)
 
-
-
- # print(count_notice_num)ㅇㅁ
+            # f_write.close()
+    # f_read.close()
