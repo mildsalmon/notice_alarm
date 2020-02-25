@@ -32,8 +32,6 @@ html = req.text
 soup = BeautifulSoup(html, 'html.parser')
 posts = soup.select('td > a')
 num = soup.find_all(title='공지')
-count_page_num = 0
-count_notice_num = 0
 
 for i in range(len(num)):           # 공지로 위로 올라간 게시글 제외한 최신 게시글 분류
     del posts[0]
@@ -65,6 +63,6 @@ with open(os.path.join(BASE_DIR, 'latest.txt'), 'r+',encoding='utf-8') as f_read
                 print("timeout")            # 짧은 시간에 message를 과도하게 보내면 timeout이 뜨는것같다.
                 break                       # message를 많이 보내서 발생한다기 보다는, 한번에 보낼 수 있는 url의 양이 10개로 제한되어 있는듯
 
-    with open(os.path.join(BASE_DIR, 'latest.txt'),'w+',encoding='utf-8') as f_write:
-        f_write.write(posts[0].text)
+with open(os.path.join(BASE_DIR, 'latest.txt'),'w+',encoding='utf-8') as f_write:
+    f_write.write(posts[0].text)
 
