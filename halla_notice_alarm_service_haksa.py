@@ -21,10 +21,10 @@ server_errors = [500,502, 503, 504]
 print(time.strftime("%c", time.localtime(time.time())))
 
 if req.status_code in client_errors:
-    print("클라이언트 에러")
+    print(req.status_code + ": 클라이언트 에러")
     sys.exit(1)
 elif req.status_code in server_errors:
-    print("서버 에러")
+    print(req.status_code + ": 서버 에러")
     sys.exit(1)
 
 bot = telegram.Bot(token=my_token)
@@ -55,7 +55,7 @@ with open(os.path.join(BASE_DIR, 'latest_haksa.txt'), 'r+',encoding='utf-8') as 
             print(url)
             try:
                 if post != posts[10]:
-                    bot.sendMessage(chat_id=my_chat_id, text="일반공지 : " + post.text)
+                    bot.sendMessage(chat_id=my_chat_id, text="학사공지 : " + post.text)
                     bot.sendMessage(chat_id=my_chat_id, text=url)
                 else:
                     break
