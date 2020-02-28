@@ -11,9 +11,9 @@ import time
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-my_token = '****'
+my_token = '봇 토큰'
+my_chat_id = "채널 주소 / 서비스 채널은 '@***' / 테스트 채널은 '-***'"
 req = requests.get('http://www.halla.ac.kr/mbs/kr/jsp/board/list.jsp?boardId=23409&id=kr_060102000000')
-my_chat_id = "****"
 
 client_errors = [400, 401, 403, 404, 408]
 server_errors = [500,502, 503, 504]
