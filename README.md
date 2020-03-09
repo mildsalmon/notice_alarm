@@ -4,6 +4,11 @@
 
 ![서비스중인 텔레그램 채널](./image/run.png)
 
+# 서비스 채널
+
+[Dankook_notice_alarm_service](https://t.me/dankook_notice_alarm)
+[Halla_notice_alarm](https://t.me/halla_notice_Alarm)
+
 # 참고 자료
 
 블로그에 개발일지를 작성했습니다.
