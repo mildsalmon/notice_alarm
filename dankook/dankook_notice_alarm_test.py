@@ -57,9 +57,10 @@ for i, all_post_subject in enumerate(all_posts_subject):        # 뽑아낸 단�
 for i, CheonanCommonPost in enumerate(CheonanCommonPosts):          # 원하는 데이터
     save_url_messageld.append(str(CheonanCommonPost).split('"')[1])       # _Bbs_WAR_bbsportlet_messageId=714769
     save_messageld.append(save_url_messageld[i].split('&amp')[9])   # 앞 뒤에 중복되는 문자열이 없다.
-    use_url_messageld.append(str(CheonanCommonPost).split('"')[1])         # 그래서 a href 부분을 save_url_~ 리스트에 입력하고
-    use_messageld.append(use_url_messageld[i].split('&amp;')[9])    # &amp;로 다시 분리한다.
-                                                                    # .get을 안쓴 이유는 CheonanCommonPosts가 리스트이기 때문.
+    use_url_messageld.append(str(CheonanCommonPost.get('href')))        # 그래서 a href 부분을 save_url_~ 리스트에 입력하고
+    use_messageld.append(use_url_messageld[i].split('&')[9])    # &amp;로 다시 분리한다.
+print(use_messageld)                                                                    # .get을 안쓴 이유는 CheonanCommonPosts가 리스트이기 때문.
+print(save_messageld)
 save_messageld[0] = save_messageld[0].lstrip(";")               # 파일 리스트로 불러올때 ; 기준으로 나누려고 0번 앞에 ;를 제거함
 
 if not(os.path.isfile(os.path.join(BASE_DIR, 'dankook_latest.txt'))):
