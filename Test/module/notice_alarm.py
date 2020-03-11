@@ -10,7 +10,7 @@ from telegram_bot.telegram_bot_control import TelegramBot
 
 
 class NoticeAlarm:
-    def __init__(self, re_univ_name, re_notice_type, url):
+    def __init__(self, re_univ_name, re_notice_type):
         # univ_name = {'한라': 'halla',
         #              '단국': 'dankook',
         #              'test': 'test'}
@@ -22,7 +22,7 @@ class NoticeAlarm:
         self.BASE_DIR = os.path.join(os.path.dirname(os.path.abspath(os.path.dirname(__file__))),"data_file")
         self.univ_name = re_univ_name
         self.re_notice_type = re_notice_type
-        self.url = url
+        # self.url = url
         self.file_name = self.univ_name + "_" + self.re_notice_type + "_old_data.txt"
 
     def web_errors(self, status_code_req):
@@ -62,7 +62,7 @@ class NoticeAlarm:
 
     # 공통
     # url은 학교별 html 분석에서 끝내고 오기 .get('href') 전까지
-    def matching(self, posts, use_boardSeq, chat_id):
+    def matching(self, posts, use_boardSeq, chat_id, re_url=""):
         telegram_bot = TelegramBot(re_univ_name=self.univ_name, re_notice_type=self.re_notice_type)
         old_data = self.open_file()
         for index, post in enumerate(posts):
@@ -79,7 +79,7 @@ class NoticeAlarm:
                 print("세번째 게시글 체크")
                 break
             else:
-                url = self.url + post.get('href')
+                url = re_url + post.get('href')
                 print(url)
                 try:
                     if post != posts[5]:

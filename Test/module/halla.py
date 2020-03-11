@@ -11,14 +11,12 @@ class Halla(NoticeAlarm):
         #              '단국' : 'dankook',
         #              'test' : 'test'}
         self.notice_type = {'일반': 'normal',
-                            '학사': 'academic',
-                            '죽전': 'jukjeon',
-                            '천안': 'cheonan',
-                            '공통': 'common'}
+                            '학사': 'academic'}
+
         if re_notice_type == self.notice_type['일반'] or re_notice_type == self.notice_type['학사']:
             url = "http://www.halla.ac.kr/mbs/kr/jsp/board/"
 
-        super().__init__(re_univ_name=re_univ_name, re_notice_type=re_notice_type, url=url)
+        super().__init__(re_univ_name=re_univ_name, re_notice_type=re_notice_type)
 
         if re_notice_type == self.notice_type['일반']:
             self.req = requests.get(url + "list.jsp?boardId=23401&mcategoryId=&id=kr_060101000000")
@@ -34,7 +32,7 @@ class Halla(NoticeAlarm):
             self.write_file(save_content=save_boardSeq)
 
         old_data = self.open_file()
-        self.matching(posts=posts, use_boardSeq=use_boardSeq, chat_id=self.show_chat_id())
+        self.matching(posts=posts, use_boardSeq=use_boardSeq, chat_id=self.show_chat_id(), re_url=url)
         self.write_file(save_content=save_boardSeq)
 
     # 한라대 클래스로 분리
@@ -62,5 +60,5 @@ class Halla(NoticeAlarm):
 
 
 if __name__ in "__main__":
-    ha = Halla("한라", "일반")
-    print(type(ha.req))
+    ha = Halla("normal", 'test')
+
