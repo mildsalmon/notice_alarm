@@ -16,6 +16,13 @@ class TelegramBot:
         #                '죽전': 'jukjeon',
         #                '천안': 'cheonan',
         #                '공통': 'common'}
+        self.reverse_notice = {
+            'normal': '일반',
+            'academic': '학사',
+            'jukjeon': '죽전',
+            'cheonan': '천안',
+            'common': '공통'
+        }
 
         self.bot_token = bot_info(re_univ_name)
         self.univ_name = re_univ_name
@@ -27,5 +34,5 @@ class TelegramBot:
 
     # 텔레그램 봇 메시지 전송
     def telegram_bot_sendmessage(self, chat_id, new_post, url):
-        self.bot.sendMessage(chat_id=chat_id, text=self.notice_type + "공지 : " + new_post)
+        self.bot.sendMessage(chat_id=chat_id, text=self.reverse_notice[self.notice_type] + " 공지 : " + new_post)
         self.bot.sendMessage(chat_id=chat_id, text=url)

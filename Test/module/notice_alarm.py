@@ -19,6 +19,7 @@ class NoticeAlarm:
         #                '죽전': 'jukjeon',
         #                '천안': 'cheonan',
         #                '공통': 'common'}
+        print('\n')
         self.BASE_DIR = os.path.join(os.path.dirname(os.path.abspath(os.path.dirname(__file__))),"data_file")
         self.univ_name = re_univ_name
         self.re_notice_type = re_notice_type

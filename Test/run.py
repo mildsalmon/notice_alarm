@@ -14,6 +14,9 @@ notice_type = {'일반': 'normal',
 
 def start():
     test('test', 'common')
+    test('test', 'normal')
+    test('test', 'academic')
+    test('test', 'cheonan')
 
 def test(input_univ_name, input_notice_type):
     if input_univ_name == univ_name['test']:
