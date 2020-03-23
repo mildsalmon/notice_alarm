@@ -1,5 +1,5 @@
 import time
-from test_code import run_test
+import run_test
 
 if __name__ in "__main__":
     print("\n\n")

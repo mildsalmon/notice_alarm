@@ -1,5 +1,5 @@
 import time
-from dankook import run
+import run
 
 
 if __name__ in "__main__":
