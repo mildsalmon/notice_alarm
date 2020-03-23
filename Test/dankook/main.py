@@ -1,5 +1,6 @@
 import time
-import run
+from dankook import run
+
 
 if __name__ in "__main__":
     print("\n\n")

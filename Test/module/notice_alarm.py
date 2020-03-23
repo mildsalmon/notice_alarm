@@ -70,23 +70,36 @@ class NoticeAlarm:
             print("post title = " + post.text)
             print("new post Seq = ", use_boardSeq[index])
             print("old data Seq num1 = ", old_data[0])
+            # for old_data_index in range(len(old_data)):
             if old_data[0] == use_boardSeq[index]:
                 print("최신글")
                 break
+            elif len(old_data) < 2:
+                print("2")
+                pass
             elif old_data[1] == use_boardSeq[index]:
                 print("두번째 게시글이랑 체크")
                 break
+            elif len(old_data) < 3:
+                print("3")
+                pass
             elif old_data[2] == use_boardSeq[index]:
                 print("세번째 게시글 체크")
                 break
-            else:
-                url = re_url + post.get('href')
-                print(url)
-                try:
-                    if post != posts[5]:
-                        telegram_bot.telegram_bot_sendmessage(chat_id=chat_id, new_post=post.text, url=url)
-                    else:
-                        break
-                except Exception as ex:
-                    print(ex)
+
+            url = re_url + post.get('href')
+            print(url)
+            try:
+                esc_num = 0
+                if len(posts) > 5:
+                    esc_num = 4
+                elif len(posts) <= 5:
+                    esc_num = len(posts)-1
+
+                if post != posts[esc_num]:
+                    telegram_bot.telegram_bot_sendmessage(chat_id=chat_id, new_post=post.text, url=url)
+                else:
                     break
+            except Exception as ex:
+                print(ex)
+                break

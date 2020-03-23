@@ -65,7 +65,7 @@ class Dankook(NoticeAlarm):
             use_boardSeq.append(use_temp[i].split('&amp;')[9])
 
         save_boardSeq[0] = save_boardSeq[0].lstrip(";")
-        #
+        print(save_boardSeq + '\n')
         return save_boardSeq, posts, use_boardSeq
 
 
