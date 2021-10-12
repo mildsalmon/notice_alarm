@@ -1,6 +1,6 @@
 > 관련 개발일지는 아래 링크를 참고해주세요.
 > 
-> [블로그 개발일지](https://blex.kr/@mildsalmon/series/%ED%95%9C%EB%9D%BC%EB%8C%80%ED%95%99%EA%B5%90-%EA%B3%B5%EC%A7%80-%EC%95%8C%EB%A6%BC-%EB%B4%87-%EC%A0%9C%EC%9E%91%EA%B8%B0)
+> [블로그 개발일지](https://blex.me/@mildsalmon/%ED%95%9C%EB%9D%BC%EB%8C%80%ED%95%99%EA%B5%90-%EA%B3%B5%EC%A7%80-%EC%95%8C%EB%A6%BC-%EB%B4%87)
 
 # notice_alarm
 
