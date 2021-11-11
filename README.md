@@ -42,3 +42,7 @@
 
 - beautifulsoup4 (4.9.3)
 - python-telegram-bot
+
+### B. Cloud
+
+- AWS - EC2
