@@ -7,9 +7,7 @@ import os
 class Halla(NoticeAlarm):
     def __init__(self, re_notice_type, re_univ_name='halla'):
         BASE_DIR = os.path.join(os.path.dirname(os.path.abspath(os.path.dirname(__file__))), "data_file")
-        # univ_name = {'한라' : 'halla',
-        #              '단국' : 'dankook',
-        #              'test' : 'test'}
+
         self.notice_type = {'일반': 'normal',
                             '학사': 'academic'}
 

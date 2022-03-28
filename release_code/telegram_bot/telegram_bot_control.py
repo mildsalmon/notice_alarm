@@ -8,14 +8,6 @@ from security.security_data import *
 # 텔레그램 봇 생성
 class TelegramBot:
     def __init__(self, re_univ_name, re_notice_type):
-        # univ_name = {'한라': 'halla',
-        #              '단국': 'dankook',
-        #              'test': 'test'}
-        # notice_type = {'일반': 'normal',
-        #                '학사': 'academic',
-        #                '죽전': 'jukjeon',
-        #                '천안': 'cheonan',
-        #                '공통': 'common'}
         self.reverse_notice = {
             'normal': '일반',
             'academic': '학사',

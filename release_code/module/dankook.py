@@ -7,9 +7,7 @@ import os
 class Dankook(NoticeAlarm):
     def __init__(self, re_notice_type, re_univ_name='dankook'):
         BASE_DIR = os.path.join(os.path.dirname(os.path.abspath(os.path.dirname(__file__))), "data_file")
-        # univ_name = {'한라' : 'halla',
-        #              '단국' : 'dankook',
-        #              'test' : 'test'}
+
         self.notice_type = {'죽전': 'jukjeon',
                             '천안': 'cheonan',
                             '공통': 'common'}
