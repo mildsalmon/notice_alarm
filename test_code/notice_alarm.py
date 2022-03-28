@@ -2,7 +2,7 @@
 
 ###### 테스트 코드
 
-from security.security_data import *
+from release_code.security.security_data.py import *
 import sys
 import os
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
@@ -11,15 +11,6 @@ from telegram_bot.telegram_bot_control import TelegramBot
 
 class NoticeAlarm:
     def __init__(self, re_univ_name, re_notice_type):
-        # univ_name = {'한라': 'halla',
-        #              '단국': 'dankook',
-        #              'test': 'test'}
-        # notice_type = {'일반': 'normal',
-        #                '학사': 'academic',
-        #                '죽전': 'jukjeon',
-        #                '천안': 'cheonan',
-        #                '공통': 'common'}
-        print('\n')
         self.BASE_DIR = os.path.join(os.path.dirname(os.path.abspath(os.path.dirname(__file__))),"data_file")
         self.univ_name = re_univ_name
         self.re_notice_type = re_notice_type
